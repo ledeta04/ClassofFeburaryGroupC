@@ -16,7 +16,7 @@ Step 3-- then copy the URL and go to terminal or gitbash
 step 4-- git remote add origin URL
 step 5-- git push -u origin master       ,if master didn't work just change master to main
 
-violà  our file local repo is pushed to the remote repo. we can go to Github and check if we did it correctly.
+violà  our file, the local repo is pushed to the remote repo. we can go to Github and check if we did it correctly.
 
 If everything is correct that means we are done with the first pathway.
 
