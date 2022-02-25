@@ -1,4 +1,5 @@
 How to create local repo and push to Remote repo
+
 step 1-- create folder on desktop
 step 2-- go to terminal(for MacOS),gitbash for window
 step 3-- For window, go to the folder and add txt file. For MacOS, add txt file by using command line, touch filename.txt   and then,   echo write message >> filename.txt
@@ -8,6 +9,7 @@ step 6-- git commit -m "I added a newfile or any message"    , this will save ou
 step 7-- git status   , this will show us the status of our commit. If it say nothing to commit your working file is clean, that means we are good to go. yeaa lol
 
 Now that our local repo is ready it's time to push to the remote repo on Github.
+
 step 1-- download git hub and create account
 step 2-- go to new and create a repo same as the local repo that we already created 
 Step 3-- then copy the URL and go to terminal or gitbash
