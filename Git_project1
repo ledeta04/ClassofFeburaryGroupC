@@ -1,0 +1,21 @@
+How to create local repo and push to Remote repo
+step 1-- create folder on desktop
+step 2-- got to terminal(for MacOS),gitbash for window
+step 3-- For window, got to the folder and add txt file. For MacOS, add txt file by using command line, touch filename.txt 
+                                                                    and then, echo write message >> filename.txt
+step 4-- go to your terminal or gitbash then,  git add .  or git add filename   note:- git add . will add all the .txt files we created all together. 
+step 5-- git status   ,to see if our .txt file is on stage, ready to be commit
+step 6-- git commit -m "I added a newfile or any message"    , this will save our change to the local repo with a comment
+step 7-- git status   , this will show us the status of our commit. If it say nothing to commit your working file is clean, we are good to go yeaa lol
+
+Now once our local repo is ready it's time to push to the remote repo on Github.
+step 1-- download git hub and create account
+step 2-- go to new and create a repo same as the local repo
+Step 3-- then copy the URL and go to terminal or gitbash
+step 4-- git remote add origin URL
+step 5-- git push -u origin master   ,if master didn't work just change master to main
+
+violà  our file local repo is pushed to the remote repo 
+now we are done with the first pathway
+
+Good job group C.
