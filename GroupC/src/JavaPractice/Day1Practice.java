@@ -1,7 +1,8 @@
 package JavaPractice;
 
 public class Day1Practice {
-
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
