@@ -1,0 +1,325 @@
+-- USE EXCUTE TO SAY RUN
+create schema GroupC;
+use groupc;
+
+-- DDL FORMAT
+  -- CREATE, ALTER, TRUNCATE, DROP, RENAME
+
+create table amazon(
+cid int primary key auto_increment,
+cname varchar (255),
+caddress varchar(255) not null,
+cshipdate timestamp default current_timestamp,
+cgender enum('F','M'),
+czipcode int,
+Ccity varchar(255),
+status boolean
+);
+
+-- DDL constraints ALTER( CREATE, ALTER, TRUNCATE, DROP, RENAME)
+-- Alter(add, modify, drop,  rename,change)
+alter table amazon
+add column cpayment double;
+ 
+ desc amazon;
+ 
+alter table amazon
+modify column cname varchar(255) not null;
+
+desc amazon;
+
+ ALTER table amazon
+ add column cphone int;
+ 
+-- how to delete data
+
+alter table amazon
+drop column cphone;
+
+alter table amazon
+drop Cnu;
+alter table amazon 
+drop Cnu;
+
+-- How to edit table and column
+
+alter table amazon 
+change column Ccity Cstate varchar (255);
+
+alter table amazon
+rename to amazon1;
+
+alter table amazon1
+rename to Amazon;
+
+rename table Amazon to Amazon1;
+
+rename table Amazon1 to Amazon;
+
+-- HOW  TO TRANCATE TABLE TO DELETE ALL THE DATA IN THE TABLE 
+TRUNCATE TABLE AMAZON;
+
+-- CHECK CONSTRAINT
+alter table AMAZON
+add Cage int check (Cage>=18);
+
+desc amazon;
+
+-- TO add or edit default
+
+alter table amazon
+alter cstate set default 'MD';
+--
+alter table amazon
+modify Czipcode int unique;
+
+-- how to see the table
+select * from groupc.amazon;
+
+-- DML Commands
+Insert into amazon(cname, caddress,Cgender, czipcode, cstate,cpayment,cage)
+values ('Kedru','22s','M',45678,'VA',70000,30),('Sofia','23 s','F',23345, 'MD',60000,28),
+('Hana','1295 l','F',20901,'MD',100000,27),
+('Belay','35 b','M',22554, 'MN',70000,35),
+('Minassie','56 s','M',33456,'WA',60000,36),
+('Elisa','33 g','F',234556,'MD',60000,33),
+('Ashu','33 g','M',33455,'VA',200000,36),('fasil', '26 f', 'M',20902,'MD',2000,19);
+
+
+alter table amazon
+drop column Cage;
+
+delete from amazon
+where cid=8;
+
+-- turn off
+set sql_safe_update=0;
+-- turn on
+set sql_safe_updates=1;
+
+delete from amazon
+where cid=6;
+ 
+ update amazon
+ set cstate='LA'
+ where cid=3;
+ 
+ select * from groupc.amazon;
+ -- --------------------------------------------------
+ SELECT * FROM groupc.amazon;
+
+-- How to update data
+
+update amazon
+set Cage = 42, Cstate = 'FL'
+where Cid = 6;
+
+-- How to delete data
+
+delete from amazon
+where Cid = 6;
+
+desc amazon;
+
+-- how to select data
+select * from amazon;
+
+select *
+from amazon
+where Cstate = 'MD';
+
+-- how to use Distinct 
+
+select distinct Cgender
+from amazon;
+
+select distinct cstate 
+from amazon;
+
+-- to use order by(asc,desc)
+
+select cage 
+from amazon
+order by Cage asc;
+
+select *
+from amazon
+order by Cpayment asc, cname asc;
+
+-- Logical operators (And, OR, NOT)  
+
+select *
+from amazon
+where cpayment>6000 and cid>3;
+
+select *
+from amazon
+where cpayment>6000 or cgender='m';
+
+Select *
+from amazon
+where not Cstate='MD';
+-- this work by the logic of if the statement is true or wrong
+select *
+from amazon
+Where not ((cpayment>6000 and cid>3) and cname='belay');
+
+
+
+-- we can use start transaction istead of sql_safe_update=0 or 1 or on/off
+
+start transaction;
+savepoint start;
+
+insert into amazon(cname, caddress,Cgender, czipcode, cstate,cpayment,cage)
+values('Ruth','22r','F','22345','MD',9000,32);
+savepoint ins;
+
+insert into amazon(cname, caddress,Cgender, czipcode, cstate,cpayment,cage)
+values('jason','24r','F','22355','MD',15000,25);
+savepoint ins;
+
+update amazon
+set cname='David'
+where cid=9;
+savepoint upd;
+
+delete from amazon 
+where cid=9;
+savepoint del;
+rollback to upd;
+
+commit;
+------------
+-- Aggregate functions min,max,count,avg,sum
+
+select* from amazon;
+
+select max(Cage) as maxage
+from amazon;
+
+select min(Cage)
+from amazon;
+
+select count(*)
+from amazon
+where cpayment>60000;
+
+select count(*)
+from amazon
+where cage>35;
+
+select avg(Cpayment)
+from amazon;
+ 
+ select sum(Cpayment)
+ from amazon;
+
+-- Special operators (Between, Is Null and Is Not Null, Exists, In, Like, Any, ALL )
+Select*
+from amazon
+where Cpayment between 60000 AND 70000;
+
+Select* 
+FROM AMAZON
+where Cname between 'Hana'and'Sofia';
+
+Select *
+from amazon
+where Cpayment is null;
+
+Select *
+from amazon
+where Caddress is not null;
+
+select*
+from amazon
+where cname like 'H%';
+
+select*
+from amazon
+where cname like '%A';
+
+select*
+from amazon
+where cname like '%SS%';
+
+select*
+from amazon
+where cname like '_E%';
+
+select*
+from amazon
+where cname like 'H%A';
+
+
+select *
+from amazon where cstate in ('va','MD');
+
+-- Nested Querys (Exists, All,ANY)
+-- we need two or more table inorder to perform the next command
+CREATE TABLE customer (  
+  CID INT NOT NULL AUTO_INCREMENT,  
+  CName varchar(50) NOT NULL,  
+  City varchar(50) NOT NULL,  
+  PRIMARY KEY (CID)  
+);  
+CREATE TABLE Product (  
+  PID INT primary key auto_increment,  
+ CID INT,  
+  PINFO varchar(50) NOT NULL,  
+  Cproduct varchar(50) NOT NULL default 'iphone',  
+  CONSTRAINT fk_customer FOREIGN KEY (CID)  
+  REFERENCES customer(CID)  
+  ON DELETE CASCADE  
+  ON UPDATE CASCADE  
+);  
+
+INSERT INTO customer(CName, City) VALUES  
+('Joseph', 'California'),  
+('Mary', 'NewYork'),  
+('John', 'Alaska');  
+DESC CUSTOMER;
+SELECT * FROM CUSTOMER;
+
+DESC PRODUCT;
+SELECT * FROM product;
+
+INSERT INTO Product(PINFO,Cproduct)
+ values ('Electronics', 'iphone'),
+('furniture','chairs'),
+('tools','hammer'),
+('cloths','tshirts');
+-- to try the nest query after we put the two table and connect them by foreign key we will check desc prodict if cid say MUL that means they are connected by foreign key
+-- how to delete column from the parent table
+alter table customer
+drop column city;
+ 
+ alter table customer
+ add column City varchar(50) NOT NULL;
+ 
+-- How to delete the foreign key
+alter table customer
+drop foreign key fk_customer;
+
+-- How to create FK on existing table
+
+alter table customer
+add constraint fk_customer foreign key(CID) references
+customer(CID) on delete cascade on update cascade;
+
+select * 
+from PRODUCT
+where exists(select * from CUSTOMER where PRODUCT.PID=CUSTOMER.CID);
+
+select * 
+from PRODUCT
+where NOT exists(select * from CUSTOMER where PRODUCT.PID=CUSTOMER.CID);
+
+SELECT *
+FROM PRODUCT
+WHERE PID>=ALL (SELECT PID FROM PRODUCT WHERE PID=3);
+
+SELECT *
+FROM PRODUCT
+WHERE PID>=ANY (SELECT PID FROM PRODUCT WHERE PID=3);

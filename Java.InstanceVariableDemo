@@ -1,0 +1,30 @@
+
+						// This is for Static Variables
+/*Notes:-
+*We don't need to create an object to access static variable
+*We can't create static variable for instance variable
+*/
+
+package com.day3;
+
+public class StaticVariableDemo {
+	
+	public static double salary;  			   // it's a static variable because it uses static
+	public static String dept = "Finance";    //static variable
+	public int age =25;                      //instance variable 
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		StaticVariableDemo.salary = 4000;
+		System.out.println(StaticVariableDemo.salary);
+		System.out.println(StaticVariableDemo.dept);
+		
+	}
+
+}
+
+// This is if we want to create an object, which is not necessary for static variable: 
+// StaticVariableDemo anyname = new StaticVariableDemo();
+
